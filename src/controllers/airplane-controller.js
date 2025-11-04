@@ -48,4 +48,39 @@ const getAirplaneById = asyncHandler(async (req, res) => {
         );
 });
 
-module.exports = { createAirplane, getAirplanes, getAirplaneById };
+const destroyAriplane = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const response = await AirplaneService.destroyAriplane(id);
+    return res
+        .status(StatusCodes.OK)
+        .json(
+            new ApiResponse(
+                StatusCodes.OK,
+                response,
+                "Airplane deleted successfully"
+            )
+        );
+});
+
+const updateAirplane = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { capacity } = req.body;
+    const response = await AirplaneService.updateAirplane(id, { capacity });
+    return res
+        .status(StatusCodes.OK)
+        .json(
+            new ApiResponse(
+                StatusCodes.OK,
+                response,
+                "Airplane updated successfully"
+            )
+        );
+});
+
+module.exports = {
+    createAirplane,
+    getAirplanes,
+    getAirplaneById,
+    destroyAriplane,
+    updateAirplane,
+};

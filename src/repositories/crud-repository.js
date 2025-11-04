@@ -11,12 +11,16 @@ class CrudRepository {
         return response;
     }
 
-    async destroy(data) {
+    async destroy(data, resource) {
         const response = await this.model.destroy({
             where: {
                 id: data,
             },
         });
+
+        if (!response) {
+            throw new ApiError(StatusCodes.NOT_FOUND, `${resource} not found`);
+        }
         return response;
     }
 
@@ -24,7 +28,7 @@ class CrudRepository {
         const response = await this.model.findByPk(data);
 
         if (!response) {
-            throw new ApiError(StatusCodes.NOT_FOUND, "Data not found");
+            throw new ApiError(StatusCodes.NOT_FOUND, `${resource} not found`);
         }
         return response;
     }
@@ -34,10 +38,14 @@ class CrudRepository {
         return response;
     }
 
-    async update(id, data) {
+    async update(id, data, resource) {
         const response = await this.model.update(data, {
             where: { id: id },
         });
+
+        if (!response) {
+            throw new ApiError(StatusCodes.NOT_FOUND, `${resource} not found`);
+        }
         return response;
     }
 }

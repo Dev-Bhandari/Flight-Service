@@ -14,61 +14,61 @@ module.exports = {
          */
         await queryInterface.bulkInsert("Airplanes", [
             {
-                modelNumber: "Airbus A320",
+                modelNumber: "airbusa320",
                 capacity: 180,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "Airbus A380",
+                modelNumber: "airbusa380",
                 capacity: 500,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "Boeing 737",
+                modelNumber: "boeing737",
                 capacity: 174,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "Boeing 747",
+                modelNumber: "boeing747",
                 capacity: 410,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "Boeing 777",
+                modelNumber: "boeing777",
                 capacity: 368,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "Boeing 787",
+                modelNumber: "boeing787",
                 capacity: 280,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "Airbus A350",
+                modelNumber: "airbusa350",
                 capacity: 325,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "Airbus A321",
+                modelNumber: "airbusa321",
                 capacity: 220,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "Embraer E190",
+                modelNumber: "embraere190",
                 capacity: 100,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                modelNumber: "ATR 72",
+                modelNumber: "atr72",
                 capacity: 72,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -83,6 +83,6 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-        await queryInterface.bulkDelete("Airplanes",{}) 
+        await queryInterface.bulkDelete("Airplanes", {});
     },
 };

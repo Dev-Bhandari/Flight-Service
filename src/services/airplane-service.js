@@ -30,7 +30,17 @@ async function getAirplanes() {
 }
 
 async function getAirplaneById(id) {
-    const airplane = await airplaneRepository.get(id);
+    const airplane = await airplaneRepository.get(id, "Airplane");
+    return airplane;
+}
+
+async function destroyAriplane(id) {
+    const response = await airplaneRepository.destroy(id, "Airplane");
+    return response;
+}
+
+async function updateAirplane(id, data) {
+    const airplane = await airplaneRepository.update(id, data, "Airplane");
     return airplane;
 }
 
@@ -38,4 +48,8 @@ module.exports = {
     createAirplane,
     getAirplanes,
     getAirplaneById,
+    destroyAriplane,
+    updateAirplane,
 };
+
+//  Airbus A321 |      220
