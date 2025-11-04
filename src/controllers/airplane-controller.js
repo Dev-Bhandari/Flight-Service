@@ -1,28 +1,51 @@
+const { asyncHandler, ApiResponse } = require("../utils");
 const { StatusCodes } = require("http-status-codes");
 const { AirplaneService } = require("../services");
 
-async function createAirplane(req, res) {
-    try {
-        console.log(req.body);
+const createAirplane = asyncHandler(async (req, res) => {
+    console.log(req.body);
+    const { modelNumber, capacity } = req.body;
 
-        const airplane = await AirplaneService.createAirplane({
-            modelNumber: req.body.modelNumber,
-            capacity: req.body.capacity,
-        });
-        return res.status(StatusCodes.CREATED).json({
-            success: true,
-            message: "Successfully created an airplane",
-            data: airplane,
-            error: {},
-        });
-    } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            success: false,
-            message: "Something went wrong while creating airplane",
-            data: {},
-            error: error,
-        });
-    }
-}
+    const airplane = await AirplaneService.createAirplane({
+        modelNumber,
+        capacity,
+    });
 
-module.exports = { createAirplane };
+    return res.status(StatusCodes.CREATED).json(
+        // ApiResponse is a class — instantiate it with `new` so it doesn't throw
+        new ApiResponse(
+            StatusCodes.CREATED,
+            airplane,
+            "Successfully created an airplane"
+        )
+    );
+});
+
+const getAirplanes = asyncHandler(async (req, res) => {
+    const airplanes = await AirplaneService.getAirplanes();
+    return res
+        .status(StatusCodes.OK)
+        .json(
+            new ApiResponse(
+                StatusCodes.OK,
+                airplanes,
+                "Fetched all airplanes successfully"
+            )
+        );
+});
+
+const getAirplaneById = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const airplane = await AirplaneService.getAirplaneById(id);
+    return res
+        .status(StatusCodes.OK)
+        .json(
+            new ApiResponse(
+                StatusCodes.OK,
+                airplane,
+                "Fetched airplane successfully"
+            )
+        );
+});
+
+module.exports = { createAirplane, getAirplanes, getAirplaneById };
