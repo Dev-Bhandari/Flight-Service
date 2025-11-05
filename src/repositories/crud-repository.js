@@ -6,15 +6,15 @@ class CrudRepository {
         this.model = model;
     }
 
-    async create(data) {
+    async create(data) {        
         const response = await this.model.create(data);
         return response;
     }
 
-    async destroy(data, resource) {
+    async destroy(id, resource) {
         const response = await this.model.destroy({
             where: {
-                id: data,
+                id: id,
             },
         });
 
@@ -24,7 +24,7 @@ class CrudRepository {
         return response;
     }
 
-    async get(data) {
+    async get(data, resource) {
         const response = await this.model.findByPk(data);
 
         if (!response) {
@@ -43,7 +43,7 @@ class CrudRepository {
             where: { id: id },
         });
 
-        if (!response) {
+        if (!response[0]) {
             throw new ApiError(StatusCodes.NOT_FOUND, `${resource} not found`);
         }
         return response;

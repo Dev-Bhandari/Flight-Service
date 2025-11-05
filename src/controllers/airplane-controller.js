@@ -11,14 +11,15 @@ const createAirplane = asyncHandler(async (req, res) => {
         capacity,
     });
 
-    return res.status(StatusCodes.CREATED).json(
-        // ApiResponse is a class — instantiate it with `new` so it doesn't throw
-        new ApiResponse(
-            StatusCodes.CREATED,
-            airplane,
-            "Successfully created an airplane"
-        )
-    );
+    return res
+        .status(StatusCodes.CREATED)
+        .json(
+            new ApiResponse(
+                StatusCodes.CREATED,
+                airplane,
+                "Successfully created an airplane"
+            )
+        );
 });
 
 const getAirplanes = asyncHandler(async (req, res) => {
@@ -48,9 +49,9 @@ const getAirplaneById = asyncHandler(async (req, res) => {
         );
 });
 
-const destroyAriplane = asyncHandler(async (req, res) => {
+const destroyAirplane = asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const response = await AirplaneService.destroyAriplane(id);
+    const response = await AirplaneService.destroyAirplane(id);
     return res
         .status(StatusCodes.OK)
         .json(
@@ -81,6 +82,6 @@ module.exports = {
     createAirplane,
     getAirplanes,
     getAirplaneById,
-    destroyAriplane,
+    destroyAirplane,
     updateAirplane,
 };

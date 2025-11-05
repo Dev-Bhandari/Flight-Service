@@ -1,21 +1,28 @@
 const express = require("express");
-const { AirplaceController } = require("../../controllers");
-const { AirplaneMiddlewares } = require("../../middlewares");
+const { AirplaneController } = require("../../controllers");
+const { AirplaneMiddleware } = require("../../middlewares");
+const {
+    validateUpdateRequest,
+} = require("../../middlewares/airplane-middleware");
 
 const router = express.Router();
 
 router.post(
     "/",
-    AirplaneMiddlewares.validateCreateRequest,
-    AirplaceController.createAirplane
+    AirplaneMiddleware.validateCreateRequest,
+    AirplaneController.createAirplane
 );
 
-router.get("/", AirplaceController.getAirplanes);
+router.get("/", AirplaneController.getAirplanes);
 
-router.get("/:id", AirplaceController.getAirplaneById);
+router.get("/:id", AirplaneController.getAirplaneById);
 
-router.delete("/:id", AirplaceController.destroyAriplane);
+router.delete("/:id", AirplaneController.destroyAirplane);
 
-router.put("/:id", AirplaceController.updateAirplane);
+router.put(
+    "/:id",
+    AirplaneMiddleware.validateUpdateRequest,
+    AirplaneController.updateAirplane
+);
 
 module.exports = router;

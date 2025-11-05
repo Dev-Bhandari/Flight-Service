@@ -2,15 +2,15 @@ const { asyncHandler, ApiError } = require("../utils");
 const { StatusCodes } = require("http-status-codes");
 
 const validateCreateRequest = asyncHandler((req, res, next) => {
-    if (!req.body.modelNumber)
-        throw new ApiError(StatusCodes.BAD_REQUEST, "Model Number required");
+    if (!req.body.name)
+        throw new ApiError(StatusCodes.BAD_REQUEST, "City name required");
 
     next();
 });
 
 const validateUpdateRequest = asyncHandler((req, res, next) => {
-    if (!req.body.capacity)
-        throw new ApiError(StatusCodes.BAD_REQUEST, "Capacity required");
+    if (!req.body.name)
+        throw new ApiError(StatusCodes.BAD_REQUEST, "City name required");
 
     next();
 });
