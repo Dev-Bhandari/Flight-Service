@@ -20,6 +20,13 @@ async function createCity(data) {
                 errorList
             );
         }
+        if (error.name == "SequelizeUniqueConstraintError") {
+            let errorList = [];
+            error.errors.forEach((error) => {
+                errorList.push(error.message);
+            });
+            throw new ApiError(StatusCodes.CONFLICT, errorList, errorList);
+        }
         throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, error.message);
     }
 }

@@ -3,7 +3,18 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "dev": "node --watch src/index.js"
+        "dev": "node --watch src/index.js",
+        
+        "mig:gen": "cd src && npx sequelize-cli migration:generate",
+        "mig:run": "cd src && npx sequelize-cli db:migrate",
+        "mig:undo": "cd src && npx sequelize-cli db:migrate:undo",
+        "mig:undo:all": "cd src && npx sequelize-cli db:migrate:undo:all",
+
+        "model:gen": "cd src && npx sequelize-cli model:generate",
+        "seed:gen": "cd src && npx sequelize-cli seed:generate",
+        "seed:run": "cd src && npx sequelize-cli db:seed:all",
+        "seed:undo": "cd src && npx sequelize-cli db:seed:undo",
+        "seed:undo:all": "cd src && npx sequelize-cli db:seed:undo:all"
     },
     "author": "Dev Bhandari",
     "license": "ISC",
